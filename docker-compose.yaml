@@ -1,0 +1,66 @@
+version: "3"
+services:
+  mongodb-srv:
+    image: mongo:6.0-jammy
+    restart: always
+    ports:
+      - 27017:27017
+  rabbitmq-srv:
+    image: rabbitmq:3.12-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: always
+  wallet:
+    build:
+      context: .
+      args:
+        - APP=wallet
+    restart: always
+    depends_on:
+      - rabbitmq-srv
+      - mongodb-srv
+  user-create:
+    build:
+      context: .
+      args:
+        - APP=user-create
+    restart: always
+    depends_on:
+      - rabbitmq-srv
+      - mongodb-srv
+      - wallet
+  user-info:
+    build:
+      context: .
+      args:
+        - APP=user-info
+    restart: always
+    depends_on:
+      - rabbitmq-srv
+      - mongodb-srv
+      - wallet
+  user-update:
+    build:
+      context: .
+      args:
+        - APP=user-update
+    restart: always
+    depends_on:
+      - rabbitmq-srv
+      - mongodb-srv
+      - wallet
+
+
+  api:
+    build:
+      context: .
+      args:
+        - APP=api
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - user-create
+      - user-info
+      - user-update

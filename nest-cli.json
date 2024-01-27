@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/api/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/api",
+  "projects": {
+    "api": {
+      "type": "application",
+      "root": "apps/api",
+      "entryFile": "main",
+      "sourceRoot": "apps/api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api/tsconfig.app.json"
+      }
+    },
+    "wallet": {
+      "type": "application",
+      "root": "apps/wallet",
+      "entryFile": "main",
+      "sourceRoot": "apps/wallet/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wallet/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "user-create": {
+      "type": "application",
+      "root": "apps/user-create",
+      "entryFile": "main",
+      "sourceRoot": "apps/user-create/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user-create/tsconfig.app.json"
+      }
+    },
+    "user-info": {
+      "type": "application",
+      "root": "apps/user-info",
+      "entryFile": "main",
+      "sourceRoot": "apps/user-info/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user-info/tsconfig.app.json"
+      }
+    },
+    "user-update": {
+      "type": "application",
+      "root": "apps/user-update",
+      "entryFile": "main",
+      "sourceRoot": "apps/user-update/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user-update/tsconfig.app.json"
+      }
+    }
+  }
+}
